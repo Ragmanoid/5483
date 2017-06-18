@@ -1,12 +1,6 @@
 ﻿<html>
 <head>
-
     <title>Transistor 5483</title>
-    <style type="text/css">
-        body {padding:1em;}
-        h1 {font-size:24px;}
-        div.wrapper {width:700px;font-size:18px;}
-    </style>
     <script type="text/javascript">
         document.ondragstart = noselect; 
         document.onselectstart = noselect; 
@@ -14,14 +8,100 @@
         function noselect() {return false;} 
     </script>
 </head>
-<body oncopy="return false;" oncontextmenu="return false;">
-    <div class="wrapper">
-        <p>12</p>
-   
-    </div>
-	<div>
-        <p>12</p>
-   
-    </div>
+
+
+<script type="text/javascript">
+
+	var countQuest = 0;
+	var plus = 0;
+	var test_start = 0;
+	
+	function check(num){
+	
+		if(num == 4){ 
+			
+			document.getElementById('area').style.display='block'; //
+			document.getElementById('start').style.display='none';
+			document.getElementById('end').style.display='inline';
+
+			if(test_start == 0){
+			
+					//Массив вопросов
+				var questions = ["1","12","13","14","15","16","17","18","19","111","112","113","114","115","116","117","118","119","1111","2909"];
+
+					//Массивы вариантов ответов
+				var number1 = ["Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да"];	
+				var number2 = ["Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет"];
+
+				document.getElementById('question').innerHTML=questions[countQuest];
+				document.getElementById('option1').innerHTML=number1[countQuest];
+				document.getElementById('option2').innerHTML=number2[countQuest];
+				
+					//Массив правильных ответов
+				var answer = [1,1,0,1,1,1,0,1,0,1,1,0,1,1,1,1,1,1,1,0];
+				
+				test_start = 1;	
+			}
+		}
+		else{
+					//Массив вопросов
+			var questions = ["1","12","13","14","15","16","17","18","19","111","112","113","114","115","116","117","118","119","1111","2909"];
+			
+				//Массивы вариантов ответов
+			var number1 = ["Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да","Да"];	
+			var number2 = ["Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет","Нет"];	
+			
+				//Массив правильных ответов
+			var answer = [1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,1,0];
+			
+			if(countQuest == 2 || countQuest == 6 || countQuest == 8 || countQuest == 12 || countQuest == 19) {
+				if(num == 0) plus++;
+			}
+			if((countQuest == 2 || countQuest == 6 || countQuest == 8 || countQuest == 12 || countQuest == 19) && num != question[countQuest]) plus--;
+			if(questions.length - 1> countQuest){
+
+				countQuest++;
+				
+				document.getElementById('question').innerHTML=questions[countQuest];
+			
+				document.getElementById('option1').innerHTML=number1[countQuest];
+				document.getElementById('option2').innerHTML=number2[countQuest];
+
+			}
+			else{ 
+			
+				document.getElementById('area').style.display='none';
+				alert('У Вас ' + plus + ' правильных ответа!');
+				if(plus == -1) window.open("https://www.google.ru/?gws_rd=ssl");
+				
+			}
+		}
+	}
+	
+</script>
+
+	<div style="margin-top: 200px;">
+
+		<div id="area" class="wrapper">
+
+			<center>			
+			
+				<p  id="question"></p>
+				
+				<button onclick="check(0)" class="myButton" id="option1"></button>
+				
+				<button onclick="check(1)" class="myButton" id="option2"></button>
+			
+			</center>
+
+		</div>
+	
+	</div>	
+	
+	<br><center>
+		<button id="start" class="myButton" onclick="check(4)">Приступить к тесту</button>
+			
+	</center>
 </body>
 </html>
+</body>
